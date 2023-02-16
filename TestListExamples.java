@@ -18,4 +18,22 @@ public class TestListExamples {
     List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
     assertEquals(expected, merged);
   }
+
+  @Test(timeout = 500)
+  public void testMergeLeftEnd() {
+    List<String> left = Arrays.asList("a", "b", "c");
+    List<String> right = Arrays.asList("a", "d");
+    List<String> merged = ListExamples.merge(right, left);
+    List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
+    assertEquals(expected, merged);
+  }
+
+  @Test(timeout = 500)
+  public void testMergeWords() {
+    List<String> left = Arrays.asList("Apple", "Battle", "Computer");
+    List<String> right = Arrays.asList("Answer", "Delta");
+    List<String> merged = ListExamples.merge(right, left);
+    List<String> expected = Arrays.asList("Answer", "Apple", "Battle", "Computer", "Delta");
+    assertEquals(expected, merged);
+  }
 }
