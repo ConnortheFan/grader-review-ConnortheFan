@@ -22,4 +22,13 @@ cp -r lib student-submission/
 cp TestListExamples.java student-submission/
 cd student-submission/
 
+set +e
+javac -cp CPATH *.java
+
+if [[ $? != 0 ]]
+then 
+    echo "Failed to compile" 
+    exit 1
+fi
+
 
