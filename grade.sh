@@ -36,20 +36,31 @@ fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-results.txt
 
+echo "--------- Test results ------------"
+# cat test-results.txt
 #grep --color -w "OK\|FAILURES!!!" test-results.txt 
 #grep --color "Failures:" test-results.txt 
 
 GREEN='\033[1;32m'
+RED='\033[1;31m'
+NC='\033[0m'
 
 if grep -q "OK" test-results.txt; then
-    echo -e "${GREEN}Test is all good, very nice 10/10"
+    echo -e "${GREEN}Test is all good, very nice 10/10${NC}"
 fi
 
-RED='\033[1;31m'
 
 if grep --color "FAILURES!!!" test-results.txt; then
     grep --color "Failures:" test-results.txt
-    echo -e "${RED}Test failed. Try harder next time ;("
+    #grep 'There were ' test-results.txt
+    NUMBER=$(grep 'There were ' test-results.txt | tr -dc '0-9')
+
+    for i in $( eval echo {1..$NUMBER} )
+    do
+        grep "$i)" test-results.txt
+    done
+    
+    echo -e "${RED}Test failed. Try harder next time ${NC};("
 fi
 
 
